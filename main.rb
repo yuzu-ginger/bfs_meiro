@@ -125,6 +125,7 @@ Window.load_resources do
           sleep(0.1)
           status = 1 if i == 12 && j == 12
       when 1            # ゴールに着いたら
+          sleep(1)
           short_map(short, route)  # 最短経路
       end
   end
