@@ -24,7 +24,7 @@ Window.load_resources do
 
     # ウィンドウの大きさ
     Window.width = 320
-    Window.height = 320
+    Window.height = 360
 
     # ブロック
     block = Image.new(20, 20, C_WHITE)            # 壁(白)
@@ -33,6 +33,7 @@ Window.load_resources do
     goal = Image.new(20, 20, C_GREEN)             # ゴール地点(緑)
     pass = Image.new(20, 20, [192, 192, 192])     # 通った道(グレー)
     route = Image.new(20, 20, [255, 255, 165, 0]) # 最短経路(オレンジ)
+    counter = Font.new(30, "MS ゴシック", :weight=>true)
 
     # 迷路を表示
     def draw_map(map, block, pass)   
@@ -94,6 +95,7 @@ Window.load_resources do
     x = 1
     y = 1
     status = 0
+    step = 0
 
     # 最短経路を表示
     def short_map(short, route)
@@ -112,6 +114,7 @@ Window.load_resources do
         Window.draw(12 * 20, 12 * 20, goal)     # ゴール地点
         case status
         when 0            # ゴールでないとき
+            step += 1
             i = ar[0][0]
             j = ar[0][1]
             Window.draw(j * 20, i * 20, player)
@@ -123,5 +126,6 @@ Window.load_resources do
             sleep(1)
             short_map(short, route)  # 最短経路
         end
+        Window.draw_font(10, 330, "#{step}", counter)
     end
 end
